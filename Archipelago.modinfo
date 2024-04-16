@@ -9,11 +9,16 @@
     <CompatibleVersions>1.2,2.0</CompatibleVersions>
   </Properties>
   <InGameActions>
+    <ImportFiles id="Archipelago_IMPORT">
+      <File>Enum.lua</File>
+      <File>Lib.lua</File>
+    </ImportFiles>
     <AddGameplayScripts id="NewAction">
       <File>Main.lua</File>
     </AddGameplayScripts>
   </InGameActions>
   <Files>
+    <File>Enum.lua</File>
     <File>Lib.lua</File>
     <File>Main.lua</File>
   </Files>
