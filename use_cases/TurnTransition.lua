@@ -1,4 +1,3 @@
-include("lib/Lib.lua");
 include("lib/Enum.lua")
 
 function OnTurnBegin()
