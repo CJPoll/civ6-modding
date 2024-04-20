@@ -3,13 +3,25 @@ include("lib/Enum.lua")
 function OnTurnBegin()
   print("START OnTurnBegin")
   print('\t', "Index", "ID", "Human?", "Barb?", "Major?", "Minor?")
-  players = Enum.filter(Game.GetPlayers(), function(index, player)
+
+  local majorPlayers = Enum.filter(Game.GetPlayers(), function(index, player)
+    print("Filtering if is major player")
     return player:IsMajor()
   end)
 
-  Enum.each(players, function(index, player)
-    print('\t', index, player:GetID(), player:IsHuman(), player:IsBarbarian(), player:IsMajor(), "?")
+  local customMajorPlayers =
+    Enum.map(majorPlayers, function(index, player)
+      return {player:GetID(), player:IsHuman(), player:IsBarbarian(), player:IsMajor()}
+    end)
+
+  Enum.each(customMajorPlayers, function(index, customMajorPlayer)
+    Enum.printOut(customMajorPlayer)
   end)
+
+  Enum.each(customMajorPlayers, function(index, customMajorPlayer)
+    print('\t', index, customMajorPlayer[1], customMajorPlayer[2], customMajorPlayer[3], customMajorPlayer[4], "?")
+  end)
+
   print("END OnTurnBegin")
 end
 
