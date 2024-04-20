@@ -10,16 +10,20 @@
   </Properties>
   <InGameActions>
     <ImportFiles id="Archipelago_IMPORT">
-      <File>Enum.lua</File>
-      <File>Lib.lua</File>
+      <File>lib/Enum.lua</File>
+      <File>lib/Lib.lua</File>
+      <File>use_cases/TurnTransition.lua</File>
+      <File>lib/APHarness.lua</File>
     </ImportFiles>
     <AddGameplayScripts id="NewAction">
-      <File>Main.lua</File>
+      <File>script/ArchipelagoMain.lua</File>
     </AddGameplayScripts>
   </InGameActions>
   <Files>
-    <File>Enum.lua</File>
-    <File>Lib.lua</File>
-    <File>Main.lua</File>
+    <File>lib/Enum.lua</File>
+    <File>lib/Lib.lua</File>
+    <File>use_cases/TurnTransition.lua</File>
+    <File>lib/APHarness.lua</File>
+    <File>script/ArchipelagoMain.lua</File>
   </Files>
 </Mod>
