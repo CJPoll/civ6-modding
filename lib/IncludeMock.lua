@@ -13,10 +13,10 @@ function bootstrapIncludes(list, value)
 end
 
 function include(fileName)
-  print("Including", fileName)
   if bootstrapIncludes(files, fileName) then
     return
   else
+    print("Including", fileName)
     table.insert(files, fileName)
     local func = assert(loadfile(fileName))
     func()

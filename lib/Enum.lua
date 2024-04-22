@@ -1,11 +1,13 @@
+include("lib/Type.lua")
 Enum = {}
 
 -- Reduce
 --
 -- Args:
 --   table: Arbitrary table
---   acc: Accumulator for traversal
---
+--   acc:   Accumulator for traversal
+--   func:  A function that takes a key, value, and accumulator and returns a new
+--          accumulator
 function Enum.reduce(tab, acc, func)
   for k, v in pairs(tab) do
     acc = func(k, v, acc);
@@ -17,7 +19,12 @@ end
 function Enum.map(tab, func)
   return Enum.reduce(tab, {}, function(key, value, acc)
     val = func(key, value);
-    table.insert(acc, key, val);
+
+    if isNumber(key) then
+      table.insert(acc, key, val);
+    else
+      table.insert(acc, val)
+    end
 
     return acc;
   end)
@@ -51,8 +58,28 @@ function Enum.includes(list, value)
   return false
 end
 
-function Enum.printOut(list)
-  Enum.each(list, function(key, value)
-    print("KEY: ", key, "VALUE: ", value)
+function Enum.keys(tab)
+  return Enum.map(tab, function(key, value)
+    return key
   end)
+end
+
+function Enum.values(tab)
+  local keys = Enum.keys(tab)
+
+  return Enum.map(keys, function(k, key)
+    return tab[key]
+  end)
+end
+
+function Enum.printOut(list, tableName)
+  local keys = Enum.keys(list)
+  local values = Enum.values(list)
+
+  print("----")
+  print("TABLE:", tableName)
+  print(unpack(keys))
+
+  print(unpack(values))
+  print("----")
 end

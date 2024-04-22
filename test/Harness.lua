@@ -1,4 +1,5 @@
 include("lib/Enum.lua")
+include("mock/Mocks.lua")
 
 tests = {}
 

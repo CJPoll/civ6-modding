@@ -1,0 +1,53 @@
+#! /usr/bin/env bash
+
+set -e;
+
+PARAMS=();
+
+function main()
+{
+  if [ -z ${PARAMS} ]; then
+    for file in $(find test -name "*Test.lua"); do
+      echo "Opening file: ${file}"
+      lua "${file}"
+      echo
+    done
+  else
+    for file in ${PARAMS[@]}; do
+      echo "Opening file: ${file}"
+      lua "${file}"
+      echo
+    done
+  fi
+}
+
+while [[ $# -gt 0 ]]; do
+  case "${1}" in
+    -a|--my-boolean-flag)
+      MY_FLAG=0;
+      shift;
+      ;;
+    -b|--my-flag-with-argument)
+      if [ -n "${2}"  ] && [ ${2:0:1} != "-" ]; then
+        MY_FLAG_ARG="${2}"
+        shift 2
+      else
+        echo "Error: Argument for ${1} is missing" >&2
+        exit 1
+      fi
+      ;;
+    -*|--*=) # unsupported flags
+      echo "Error: Unsupported flag ${1}" >&2
+      exit 1
+      ;;
+    *) # preserve positional arguments
+      PARAMS+=(${1})
+      shift
+      ;;
+  esac
+done
+
+set -- "${PARAMS[@]}"
+
+main;
+

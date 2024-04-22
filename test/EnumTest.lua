@@ -59,6 +59,7 @@ end
 
 function IncludesTest()
   local table = {1, 2, 3, 4, 5}
+
   assert(Enum.includes(table, 0) == false)
   assert(Enum.includes(table, 1))
   assert(Enum.includes(table, 5))
